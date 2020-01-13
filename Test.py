@@ -75,9 +75,9 @@ class Game(Scene):
                     quit()
 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP:
+                    if event.key == pygame.K_w:
                         paddle.movement[1] = -8
-                    elif event.key == pygame.K_DOWN:
+                    elif event.key == pygame.K_s:
                         paddle.movement[1] = 8
                 if event.type == pygame.KEYUP:
                     paddle.movement[1] = 0
