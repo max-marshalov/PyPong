@@ -314,14 +314,19 @@ class Button:
         menu.screen.blit(self.scale, (self.x, self.y))
 
     def check_collision(self):
-        if pygame.mouse.get_pos() >= (self.x, self.y) and pygame.mouse.get_pos() <= (
-                (self.x + self.width), (self.y + self.height)):
+        #if pygame.mouse.get_pos() >= (self.x, self.y) and pygame.mouse.get_pos() <= (
+                #(self.x + self.width), (self.y + self.height)):
+        if pygame.mouse.get_pos():
+            x, y = pygame.mouse.get_pos()
+            x2, y2 = self.x + self.width, self.y + self.height
 
-            return True
+            if (self.x < x < x2) and (self.y < y < y2):
 
-        else:
+                return True
 
-            return False
+            else:
+
+                return False
 
 
 game = Game()
