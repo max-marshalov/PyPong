@@ -9,7 +9,7 @@ pygame.init()
 
 FPS = 60
 
-#scr_size = (width, height) = (600, 400)
+# scr_size = (width, height) = (600, 400)
 
 clock = pygame.time.Clock()
 
@@ -49,7 +49,6 @@ class Game(Scene):
         else:
             ai.movement[1] = 0
 
-
     def main(self):
         gameOver = False
         paddle = Paddle(game.size[0] / 10, game.size[1] / 2, game.size[0] / 60, game.size[1] / 8, (255, 255, 255))
@@ -65,7 +64,6 @@ class Game(Scene):
                 gameOver = True
 
             if paddle.points < ai.points and ai.points == 11:
-
                 lose.main()
 
                 gameOver = True
@@ -128,11 +126,9 @@ class Game(Scene):
         quit()
 
 
-
 class Menu(Scene):
     def __init__(self):
         super().__init__(image="data/Menu.png")
-
 
     def main(self):
         scene = True
@@ -140,7 +136,7 @@ class Menu(Scene):
             menu.draw_background()
             exit_button = Button(250, 230, 100, 50, "data/Exit.png")
             start_button = Button(250, 150, 100, 50, "data/Start.png")
-            #start_button = Button()
+            # start_button = Button()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     scene = False
@@ -158,7 +154,6 @@ class Lose(Scene):
     def __init__(self):
         super().__init__(image="data/GameOver.png")
 
-
     def main(self):
         scene = True
         while scene:
@@ -172,11 +167,9 @@ class Lose(Scene):
             pygame.display.flip()
 
 
-
 class Win(Scene):
     def __init__(self):
         super().__init__(image="data/Win.png")
-
 
     def main(self):
         scene = True
@@ -189,25 +182,6 @@ class Win(Scene):
                     menu.main()
                     scene = False
             pygame.display.flip()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 class Paddle(pygame.sprite.Sprite):
@@ -299,7 +273,6 @@ class Ball(pygame.sprite.Sprite):
         game.screen.blit(self.image, self.rect)
 
 
-
 class Button:
     def __init__(self, pos_x, pos_y, width, height, image):
         self.width = width
@@ -314,8 +287,9 @@ class Button:
         menu.screen.blit(self.scale, (self.x, self.y))
 
     def check_collision(self):
-        #if pygame.mouse.get_pos() >= (self.x, self.y) and pygame.mouse.get_pos() <= (
-                #(self.x + self.width), (self.y + self.height)):
+        # if pygame.mouse.get_pos() >= (self.x, self.y) and pygame.mouse.get_pos() <= (
+        # (self.x + self.width), (self.y + self.height)):
+
         if pygame.mouse.get_pos():
             x, y = pygame.mouse.get_pos()
             x2, y2 = self.x + self.width, self.y + self.height
@@ -333,7 +307,5 @@ game = Game()
 menu = Menu()
 lose = Lose()
 win = Win()
-
-
 
 menu.main()
