@@ -77,6 +77,7 @@ class Game(Scene):
                         paddle.movement[1] = -8
                     elif event.key == pygame.K_s:
                         paddle.movement[1] = 8
+
                 if event.type == pygame.KEYUP:
                     paddle.movement[1] = 0
 
@@ -140,12 +141,19 @@ class Menu(Scene):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     scene = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        scene = False
+                    elif event.key == pygame.K_KP_ENTER:
+                        game.main()
+                        scene = False
                 if event.type == pygame.MOUSEBUTTONUP:
                     if exit_button.check_collision():
                         scene = False
                     if start_button.check_collision():
                         game.main()
                         scene = False
+
 
             pygame.display.flip()
 
