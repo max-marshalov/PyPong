@@ -27,6 +27,8 @@ class Scene:
         self.screen.blit(self.scale, (0, 0))
 
 
+
+
 class Game(Scene):
     def __init__(self):
         super().__init__(image="data/Board.png")
@@ -125,6 +127,24 @@ class Game(Scene):
 
         pygame.quit()
         quit()
+
+
+
+class Effects:
+    def __init__(self, image, scene):
+        self.scene = scene
+        self.image = pygame.image.load(image)
+        self.img = pygame.transform.scale(self.scene, (self.scene.width, self.scene.height))
+
+        self.scene.blit(self.scene, (0, 0))
+
+
+class DopplerEffect(Effects):
+    def __init__(self, delay):
+        super().__init__('data/Doppler.png')
+
+
+
 
 
 class Menu(Scene):
