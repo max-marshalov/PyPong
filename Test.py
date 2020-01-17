@@ -16,7 +16,7 @@ clock = pygame.time.Clock()
 pygame.mixer.music.load('sounds/hit.wav')
 pygame.mixer.music.set_volume(2)
 
-menu_sound = pygame.mixer.Sound('sounds/mn_sound.wav')
+
 
 class Scene:
     def __init__(self, image):
@@ -38,7 +38,7 @@ class Game(Scene):
         super().__init__(image="data/Board.png")
 
 
-    def displaytext(self, text, fontsize, x, y, color):
+    def displayt_text(self, text, fontsize, x, y, color):
         font = pygame.font.SysFont('sawasdee', fontsize, True)
         text = font.render(text, 1, color)
         textpos = text.get_rect(centerx=x, centery=y)
@@ -59,23 +59,23 @@ class Game(Scene):
 
 
     def main(self):
-        gameOver = False
+        game_over = False
         paddle = Paddle(game.size[0] / 10, game.size[1] / 2, game.size[0] / 60, game.size[1] / 8, (255, 255, 255))
         ai = Paddle(game.size[0] - game.size[0] / 10, game.size[1] / 2, game.size[0] / 60, game.size[1] / 8,
                     (255, 255, 255))
         ball = Ball(game.size[0] / 2, game.size[1] / 2, 12, (255, 255, 255), [5, 5])
 
-        while not gameOver:
+        while not game_over:
 
             if paddle.points > ai.points and paddle.points == 11:
                 win.main()
 
-                gameOver = True
+                game_over = True
 
             if paddle.points < ai.points and ai.points == 11:
                 lose.main()
 
-                gameOver = True
+                game_over = True
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -98,8 +98,8 @@ class Game(Scene):
             ai.draw()
             ball.draw()
 
-            game.displaytext(str(paddle.points), 20, game.size[0] / 8, 25, (255, 255, 255))
-            game.displaytext(str(ai.points), 20, game.size[0] - game.size[0] / 8, 25, (255, 255, 255))
+            game.displayt_text(str(paddle.points), 20, game.size[0] / 8, 25, (255, 255, 255))
+            game.displayt_text(str(ai.points), 20, game.size[0] - game.size[0] / 8, 25, (255, 255, 255))
 
             if pygame.sprite.collide_mask(paddle, ball):
                 ball.movement[0] = -1 * ball.movement[0]
@@ -238,7 +238,7 @@ class Paddle(pygame.sprite.Sprite):
         self.points = 0
         self.movement = [0, 0]
 
-    def checkbounds(self):
+    def check_bounds(self):
         if self.rect.top < 0:
             self.rect.top = 0
         if self.rect.bottom > game.size[1]:
@@ -250,7 +250,7 @@ class Paddle(pygame.sprite.Sprite):
 
     def update(self):
         self.rect = self.rect.move(self.movement)
-        self.checkbounds()
+        self.check_bounds()
 
     def draw(self):
         # pygame.draw.rect(self.image,self.color,(0,0,self.sizex,self.sizey))
@@ -276,7 +276,7 @@ class Ball(pygame.sprite.Sprite):
         self.score = 0
         self.movement = movement
 
-    def checkbounds(self):
+    def check_bounds(self):
         if self.rect.top < 0:
             self.rect.top = 0
             pygame.mixer.music.play()
@@ -311,7 +311,7 @@ class Ball(pygame.sprite.Sprite):
             pygame.mixer.music.play()
 
         self.rect = self.rect.move(self.movement)
-        self.checkbounds()
+        self.check_bounds()
 
     def draw(self):
         pygame.draw.circle(self.image, self.color, (int(self.rect.width / 2), int(self.rect.height / 2)),
