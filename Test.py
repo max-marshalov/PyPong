@@ -13,6 +13,10 @@ FPS = 60
 
 clock = pygame.time.Clock()
 
+pygame.mixer.music.load('sounds/hit.wav')
+pygame.mixer.music.set_volume(2)
+
+menu_sound = pygame.mixer.Sound('sounds/mn_sound.wav')
 
 class Scene:
     def __init__(self, image):
@@ -104,6 +108,7 @@ class Game(Scene):
                     ball.movement[1] = ball.maxspeed
                 if ball.movement[1] < -1 * ball.maxspeed:
                     ball.movement[1] = -1 * ball.maxspeed
+                pygame.mixer.music.play()
 
             if pygame.sprite.collide_mask(ai, ball):
                 ball.movement[0] = -1 * ball.movement[0]
@@ -112,6 +117,7 @@ class Game(Scene):
                     ball.movement[1] = ball.maxspeed
                 if ball.movement[1] < -1 * ball.maxspeed:
                     ball.movement[1] = -1 * ball.maxspeed
+                #pygame.mixer.music.play()
 
             if ball.score == 1:
                 ai.points += 1
@@ -273,27 +279,36 @@ class Ball(pygame.sprite.Sprite):
     def checkbounds(self):
         if self.rect.top < 0:
             self.rect.top = 0
+            pygame.mixer.music.play()
+
         if self.rect.bottom > game.size[1]:
             self.rect.bottom = game.size[1]
+            pygame.mixer.music.play()
+
         if self.rect.left < 0:
             self.rect.left = 0
+
         if self.rect.right > game.size[0]:
             self.rect.right = game.size[0]
 
     def update(self):
         if self.rect.top == 0 or self.rect.bottom == game.size[1]:
             self.movement[1] = -1 * self.movement[1]
+            pygame.mixer.music.play()
+
         if self.rect.left == 0:
             self.rect.centerx = game.size[0] / 2
             self.rect.centery = game.size[1] / 2
             self.movement = [random.randrange(-1, 2, 2) * 4, random.randrange(-1, 2, 2) * 4]
             self.score = 1
+            pygame.mixer.music.play()
 
         if self.rect.right == game.size[0]:
             self.rect.centerx = game.size[0] / 2
             self.rect.centery = game.size[1] / 2
             self.movement = [random.randrange(-1, 2, 2) * 4, random.randrange(-1, 2, 2) * 4]
             self.score = -1
+            pygame.mixer.music.play()
 
         self.rect = self.rect.move(self.movement)
         self.checkbounds()
