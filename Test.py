@@ -33,11 +33,13 @@ class Game(Scene):
     def __init__(self):
         super().__init__(image="data/Board.png")
 
+
     def displaytext(self, text, fontsize, x, y, color):
         font = pygame.font.SysFont('sawasdee', fontsize, True)
         text = font.render(text, 1, color)
         textpos = text.get_rect(centerx=x, centery=y)
         game.screen.blit(text, textpos)
+
 
     def aimove(self, ai, ball):
         if ball.movement[0] > 0:
@@ -50,6 +52,7 @@ class Game(Scene):
                 ai.movement[1] = 0
         else:
             ai.movement[1] = 0
+
 
     def main(self):
         gameOver = False
